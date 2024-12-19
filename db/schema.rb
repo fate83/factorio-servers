@@ -15,10 +15,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_19_104000) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "servers", force: :cascade do |t|
-    t.string "title", default: "Factorio Server"
+    t.string "name", default: "Factorio Server"
     t.string "version", default: "2.0.23"
     t.string "state", default: "offline"
+    t.string "cloud_server_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_servers_on_name", unique: true
   end
 end

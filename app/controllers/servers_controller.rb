@@ -25,6 +25,13 @@ class ServersController < ApplicationController
 
     respond_to do |format|
       if @server.save
+        _action, server = @server.create_server_instance
+        if server
+          @server.update!(cloud_server_id: server.id)
+        else
+          raise "Cloud Server could not be created: #{@server.name} (#{@serverid})"
+        end
+
         format.html { redirect_to @server, notice: "Server was successfully created." }
         format.json { render :show, status: :created, location: @server }
       else
@@ -50,6 +57,7 @@ class ServersController < ApplicationController
   # DELETE /servers/1 or /servers/1.json
   def destroy
     @server.destroy!
+    @server.destroy_server_instance!
 
     respond_to do |format|
       format.html { redirect_to servers_path, status: :see_other, notice: "Server was successfully destroyed." }
@@ -58,13 +66,14 @@ class ServersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_server
-      @server = Server.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def server_params
-      params.expect(server: [ :title, :version, :state ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_server
+    @server = Server.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def server_params
+    params.expect(server: [:name, :version])
+  end
 end
