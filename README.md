@@ -3,16 +3,19 @@
 `Ruby 3.3.5`
 
 Install Dependencies
+
 ```shell
 bin/bundle install
 ```
 
 Setup Database
+
 ```shell
 bin/rails db:setup
 ```
 
 Start server
+
 ```shell
 bin/dev
 ```
@@ -31,8 +34,8 @@ n/a
 
 ## TODO
 
-- [ ] Create Server Model
-- [ ] Create Factorio Server Instance
-- [ ] Shutdown Factorio Server Instance
+- [x] Create Server Model
+- [x] Create Factorio Server Instance
+- [x] Shutdown Factorio Server Instance
+- [ ] Install factorio server on server instance
 - [ ] Configure Factorio Server Instance
-- [ ] Create ServerVersion Model
