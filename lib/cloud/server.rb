@@ -3,7 +3,7 @@ require "hcloud"
 module Cloud
   module Server
     def self.client
-      @@client ||= Hcloud::Client.new(token: Rails.application.credentials.hcloud.api_token)
+      @@client ||= Hcloud::Client.new(token: Rails.application.config.hetzner.hcloud[:api_token])
     end
 
     def self.create(name:, datacenter:, server_type:, image:, ssh_keys:)

@@ -1,0 +1,3 @@
+development:
+    hcloud:
+      api_token:
