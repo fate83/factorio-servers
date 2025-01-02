@@ -26,5 +26,6 @@ module Factorioservers
 
     # Custom Configs
     config.hetzner = config_for(:hetzner)
+    config.ansible = config_for(:ansible)
   end
 end

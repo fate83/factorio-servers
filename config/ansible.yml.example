@@ -1,0 +1,3 @@
+---
+development:
+  private_key: "~/.ssh/Factorio Server Master"
