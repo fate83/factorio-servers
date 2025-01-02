@@ -11,7 +11,9 @@ class CreateServerJob < ApplicationJob
     )
 
     if server_instance
-      server.update!(cloud_server_id: server_instance.id)
+      server.update!(cloud_server_id: server_instance.id, cloud_server_ip: server_instance.public_net["ipv4"].ip, state: :bootstrapping)
+      Ansible.bootstrap!(server.cloud_server_ip)
+      server.update!(state: :bootstrapped)
     else
       raise "Cloud Server could not be created: #{server.name} (#{server.id})"
     end
