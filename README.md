@@ -37,5 +37,11 @@ n/a
 - [x] Create Server Model
 - [x] Create Factorio Server Instance
 - [x] Shutdown Factorio Server Instance
-- [ ] Install factorio server on server instance
+- [ ] Install Factorio server on server instance
+  - [ ] Create Factorio user
+  - [ ] Download Factorio version
+  - [ ] Copy Config
+  - [ ] Copy Save or Create New World
+  - [ ] Start Server
+- [ ] Config Firewall
 - [ ] Configure Factorio Server Instance
