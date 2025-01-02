@@ -7,4 +7,8 @@ class Server < ApplicationRecord
   def cloud_server_name
     "server-#{id}"
   end
+
+  def ip
+    Cloud::Server.ip(id: cloud_server_id)
+  end
 end
