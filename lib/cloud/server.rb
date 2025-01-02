@@ -17,5 +17,9 @@ module Cloud
     def self.destroy(id:)
       client.servers.find(id.to_i).destroy
     end
+
+    def self.ip(id:)
+      client.servers.find(id.to_i).public_net["ipv4"].ip
+    end
   end
 end
