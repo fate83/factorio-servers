@@ -38,10 +38,12 @@ n/a
 - [x] Create Factorio Server Instance
 - [x] Shutdown Factorio Server Instance
 - [ ] Install Factorio server on server instance
+  - [x] Bootstrap server instance
   - [ ] Create Factorio user
   - [ ] Download Factorio version
   - [ ] Copy Config
+  - [ ] Configure Factorio Server Instance
   - [ ] Copy Save or Create New World
   - [ ] Start Server
 - [ ] Config Firewall
-- [ ] Configure Factorio Server Instance
+- [ ] Use Turbo to update Server show page dynamically during boostrap
