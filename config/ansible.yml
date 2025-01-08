@@ -1,3 +1,4 @@
 ---
 development:
-  private_key: "~/.ssh/Factorio Server Master"
+  private_key: "~/.ssh/FactorioServerMasterKey"
+  public_key: "~/.ssh/FactorioServerMasterKey.pub"
