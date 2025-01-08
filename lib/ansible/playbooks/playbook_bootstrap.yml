@@ -26,7 +26,7 @@
       tags: always
       authorized_key:
         user: ansible
-        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG272rhQ1z1CgNhGVg8ym51e676l+XzzNpllfPIaB6au"
+        key: "{{ lookup('file', public_key) }}"
       when: ansible_user_id == "root"
 
     - name: add sudoers file for ansible service user
