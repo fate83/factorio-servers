@@ -51,7 +51,7 @@ class ServersController < ApplicationController
   # DELETE /servers/1 or /servers/1.json
   def destroy
     @server.destroy!
-    DestroyServerJob.perform_later(@server.cloud_server_id.to_i)
+    DestroyServerJob.perform_later(@server.cloud_server_id.to_i, @server.cloud_server_ip)
 
     respond_to do |format|
       format.html { redirect_to servers_path, status: :see_other, notice: "Server was successfully destroyed." }
