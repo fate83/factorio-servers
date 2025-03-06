@@ -9,7 +9,14 @@
     <%= link_to "Edit this server", edit_server_path(@server), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to "Back to servers", servers_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
-      <%= button_to "Destroy this server", @server, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium", data: { turbo_confirm: "ASD" } %>
+      <%= button_to "Destroy this server", @server, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium", data: { turbo_confirm: "Delete permanently" } %>
+    </div>
+    <div class="inline-block ml-2">
+      <% if @server.state == 'bootstrapped' %>
+        <%= button_to "Install Factorio", reinstall_server_path(@server), method: :post, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium", data: { turbo_confirm: "Install version #{@server.version}?" } %>
+      <% elsif @server.state == 'ready' %>
+        <%= button_to "Reinstall Factorio", reinstall_server_path(@server), method: :post, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium", data: { turbo_confirm: "Reinstall version #{@server.version}?" } %>
+      <% end %>
     </div>
   </div>
 </div>

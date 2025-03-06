@@ -1,5 +1,5 @@
 class ServersController < ApplicationController
-  before_action :set_server, only: %i[ show edit update destroy ]
+  before_action :set_server, only: %i[ show edit update destroy reinstall ]
 
   # GET /servers or /servers.json
   def index
@@ -25,7 +25,6 @@ class ServersController < ApplicationController
 
     respond_to do |format|
       if @server.save!
-        CreateServerJob.perform_later(@server)
         format.html { redirect_to @server, notice: "Server was successfully created." }
         format.json { render :show, status: :created, location: @server }
       else
@@ -51,11 +50,17 @@ class ServersController < ApplicationController
   # DELETE /servers/1 or /servers/1.json
   def destroy
     @server.destroy!
-    DestroyServerJob.perform_later(@server.cloud_server_id.to_i, @server.cloud_server_ip)
 
     respond_to do |format|
       format.html { redirect_to servers_path, status: :see_other, notice: "Server was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def reinstall
+    InstallHeadlessFactorioJob.perform_later(@server)
+    respond_to do |format|
+      format.html { redirect_to @server, notice: "Server is being reinstalled." }
     end
   end
 
