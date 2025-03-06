@@ -1,3 +1,4 @@
+# - Deletes Hetzner Server Instance
 class DestroyServerJob < ApplicationJob
   queue_as :default
 
