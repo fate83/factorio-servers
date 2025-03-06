@@ -1,0 +1,51 @@
+- name: create group for factorio user
+  tags: factorio,docker
+  user:
+    name: factorio
+
+- name: add factorio user
+  tags: factorio
+  user:
+    shell: /bin/bash
+    name: factorio
+    group: factorio
+    state: present
+    create_home: yes
+
+- name: fetch unix groups
+  shell: "getent group | cut -d: -f1"
+  register: unix_groups
+  changed_when: false
+
+- name: add factorio user to docker group if exists
+  tags: factorio,docker
+  user:
+    name: factorio
+    groups: docker
+    append: yes
+  when: "'docker' in unix_groups.stdout_lines"
+
+- name: add ssh key for factorio user
+  tags: factorio
+  authorized_key:
+    user: factorio
+    state: present
+    key: "{{ lookup('file', public_key) }}"
+
+- name: add .bash_profile to home folder
+  tags: factorio
+  copy:
+    src: bash_profile
+    dest: /home/factorio/.bash_profile
+    owner: factorio
+    group: factorio
+    mode: 0644
+
+- name: add sudoers file
+  tags: factorio
+  copy:
+    src: sudoer_factorio
+    dest: /etc/sudoers.d/factorio
+    owner: root
+    group: root
+    mode: 0440

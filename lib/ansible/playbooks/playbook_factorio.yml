@@ -1,5 +1,13 @@
 ---
-- name: Setup Factorio Server
+- name: Setup Factorio User
   hosts: all
+  become: yes
   roles:
     - config_factorio_user
+
+- name: Setup Factorio Server
+  hosts: all
+  become: yes
+  roles:
+    - config_factorio
+

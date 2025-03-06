@@ -1,0 +1,34 @@
+---
+- name: download factorio
+  become_user: factorio
+  tags: factorio
+  shell: >
+    wget -O {{ factorio_home }}/factorio_headless-{{ factorio_version }}.tar.gz {{ factorio_download_link }}
+    creates={{ factorio_home }}/factorio_headless-{{ factorio_version }}.tar.gz
+
+- name: unarchive
+  become_user: factorio
+  tags: factorio
+  shell: >
+    cd {{ factorio_home }} && tar xf {{ factorio_home }}/factorio_headless-{{ factorio_version }}.tar.gz
+
+- name: "install factorio service"
+  tags: factorio,service
+  template:
+    src: "factorio.service.j2"
+    dest: "/etc/systemd/system/factorio.service"
+    mode: 0644
+
+- name: "create sample savegame"
+  become_user: factorio
+  tags: factorio
+  shell: >
+    cd {{ factorio_home }} && {{ factorio_root }}/bin/x64/factorio --create map.zip
+    creates={{ factorio_home }}/map.zip
+
+- name: "Enable service factorio and ensure it is not masked"
+  ansible.builtin.systemd_service:
+    name: "factorio"
+    enabled: true
+    masked: no
+    state: started

@@ -1,0 +1,1 @@
+deploy ALL=NOPASSWD:/bin/systemctl start factorio.service, /bin/systemctl stop factorio.service, /bin/systemctl restart factorio.service, /bin/systemctl status factorio.service

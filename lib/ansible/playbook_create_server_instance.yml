@@ -1,7 +1,0 @@
----
-- name: Create Factorio Server Instance
-  hosts: factorio-servers
-  tasks:
-    - name: create server instance
-      tags: docker
-

@@ -1,0 +1,22 @@
+[Unit]
+Description=factorio Server
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=factorio
+Group=factorio
+UMask=0002
+WorkingDirectory=/home/factorio
+ExecStart=/bin/bash -c '/home/factorio/factorio/bin/x64/factorio --start-server /home/factorio/map.zip'
+
+# Output goes to /var/log/syslog and the systemd journaling system.
+#StandardOutput=journal
+#StandardError=journal
+#SyslogIdentifier=factorio
+
+[Install]
+WantedBy=multi-user.target

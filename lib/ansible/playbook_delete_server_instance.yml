@@ -1,3 +1,0 @@
----
-- name: Delete Server Instance
-  hosts: factorio-servers
