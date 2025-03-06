@@ -1,4 +1,4 @@
-<div id="<%= dom_id server %>">
+<%= turbo_frame_tag(dom_id(server)) do %>
   <p class="my-5">
     <strong class="block font-medium mb-1">Title:</strong>
     <%= server.name %>
@@ -28,5 +28,4 @@
     <strong class="block font-medium mb-1">Cloudserver-IP:</strong>
     <%= server.cloud_server_ip %>
   </p>
-
-</div>
+<% end %>
