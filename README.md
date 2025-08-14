@@ -8,12 +8,6 @@ Install Dependencies
 bin/bundle install
 ```
 
-Setup Database
-
-```shell
-bin/rails db:setup
-```
-
 Start server
 
 ```shell
@@ -22,7 +16,24 @@ bin/dev
 
 ## Configuration
 
-n/a
+### Hetzner API key
+Add Hetzner API key to config/hetzner.yml.
+
+### Database
+```shell
+createuser -d factorioservers
+```
+
+```shell
+sudo -u postgres psql
+ALTER USER factorioservers WITH PASSWORD 'factorioservers';
+```
+
+Add Datbase config to config/database.yml.
+
+```shell
+bin/rails db:setup
+```
 
 ## Services (job queues, cache servers, search engines, etc.)
 
