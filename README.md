@@ -1,6 +1,6 @@
 # Factorio Servers v0.1
 
-`Ruby 3.3.5`
+`Ruby 3.4.4`
 
 Install Dependencies
 
